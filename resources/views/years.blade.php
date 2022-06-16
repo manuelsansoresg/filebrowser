@@ -3,13 +3,14 @@
 @section('title', 'Inicio')
 
 @section('content_header')
-    <h1>Listado de usuarios</h1>
+    <h1>Listado de años</h1>
 @stop
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8">
+               
                 <div class="card">
                     <div class="card-body">
                         <p>
@@ -20,26 +21,22 @@
                         <table id="example" class="display datatable table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
+                                    <th>Año</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($list as $query)
                                     <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td> {{ $user->email }} </td>
+                                        <td>{{ $query->name }}</td>
                                         <td>
                                            <div class="text-center">
-                                            <form action="{{route('users.destroy',[$user->id])}}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <a href="/admin/users/{{ $user->id }}/edit" class="btn btn-sm btn-success"><i class="fas fa-edit text-white"></i></a>
-                                                <a href="/admin/users/pass/{{ $user->id }}/edit" class="btn btn-sm btn-secondary"><i class="fas fa-key text-white"></i></a>
-                                                <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash text-white"></i></button>
-                                            </form>
-                                                
+                                                <form action="{{route('anios.destroy',[$query->id])}}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <a href="/admin/anios/{{ $query->id }}/edit" class="btn btn-sm btn-success"><i class="fas fa-edit text-white"></i></a>
+                                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash text-white"></i></button>
+                                                </form>
                                            </div>
                                         </td>
                                     </tr>

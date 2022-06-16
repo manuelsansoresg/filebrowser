@@ -248,21 +248,23 @@ return [
         ],
         [
             'text'        => 'Usuarios',
-            'url'         => 'admin/pages',
+            'url'         => 'home',
             'icon'        => 'far fa-fw fa-user',
             
         ],
-        ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text'        => 'Años',
+            'url'         => 'admin/anios',
+            'icon'        => 'far fa-fw fa-user',
+            
         ],
+        ['header' => 'Herramientas'],
         [
-            'text' => 'change_password',
+            'text' => 'Archivos',
             'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-file',
         ],
+       
         /* [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
