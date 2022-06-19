@@ -17,8 +17,9 @@
                         <form action="/admin/users" method="POST">
                         @else
                         <form action="{{ route('users.update', $user->id) }}" method="POST">
-                        @endif
                             @method('PUT')
+                        @endif
+                           
 
                             @csrf
                             <div class="row justify-content-center">
@@ -44,6 +45,20 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    @if (!isset($user->id))
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-2 col-md-4 col-form-label">Contraseña</label>
+                                        <div class="col-sm-10 col-md-7">
+                                            <input type="password"  name="password"  class="form-control" required>
+                                            
+                                            @error('password')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    @endif
+                                    <input type="hidden" name="type" value="{{ $type }}">
                                     <div class="form-group row">
                                         <label for="" class="col-sm-2 col-md-4 col-form-label"></label>
                                         <div class="col-sm-10 col-md-7">

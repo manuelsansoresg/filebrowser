@@ -12,11 +12,29 @@ class FileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $years = Year::all();
-        Year::searchByYear(2022);
-        return view('file', compact('years'));
+        $search_file = null;
+        $query = null;
+        if ($_GET) {
+            $year_file = $request->year;
+            $query = Year::searchByYear($year_file);
+        }
+        return view('file', compact('years', 'query'));
+    }
+
+    public function searchFile(Request $request)
+    {
+        $year_file = $request->year_file;
+        $search_file = Year::searchByYear($year_file);
+        return response()->json($search_file);
+    }
+
+    public function exporFiles(Request $request)
+    {
+        $year_file = $request->year;
+        Year::createZip($year_file);
     }
 
     /**

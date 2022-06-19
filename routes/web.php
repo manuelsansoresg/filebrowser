@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Auth::routes();
@@ -27,5 +25,15 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::get('users/pass/{user_id}/edit', [App\Http\Controllers\UserController::class, 'passEdit']);
     Route::post('users/pass/{user_id}/store', [App\Http\Controllers\UserController::class, 'passStore'])->name('pass.store');
+    
+    Route::get('users/{type}/redirect', [App\Http\Controllers\UserController::class, 'redirectUserEdit']);
+    Route::get('users/{user_id}/edit/{type}', [App\Http\Controllers\UserController::class, 'edit']);
+    
+    Route::get('users/{type}/redirect-pass', [App\Http\Controllers\UserController::class, 'redirectPasswordEdit']);
+    Route::get('users/pass/{user_id}/edit/{type}', [App\Http\Controllers\UserController::class, 'passEdit']);
+
+    
     Route::resource('archivos', App\Http\Controllers\FileController::class);
+    Route::get('archivos/search/execute', [App\Http\Controllers\FileController::class, 'searchFile']);
+    Route::get('archivos/export/execute', [App\Http\Controllers\FileController::class, 'exporFiles']);
 });

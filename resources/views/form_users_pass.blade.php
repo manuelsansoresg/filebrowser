@@ -27,6 +27,7 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <input type="hidden" name="type" value="{{ $type }}">
                                     <div class="form-group row">
                                         <label for="" class="col-sm-2 col-md-4 col-form-label"></label>
                                         <div class="col-sm-10 col-md-7">

@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+    @hasrole('Administrador')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8">
@@ -48,4 +49,17 @@
             </div>
         </div>
     </div>
+    @else
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">No cuenta con permisos de administrador</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endrole
 @stop

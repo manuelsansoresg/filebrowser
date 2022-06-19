@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 return [
 
     /*
@@ -262,6 +263,17 @@ return [
         [
             'text' => 'Archivos',
             'url'  => 'admin/archivos',
+            'icon' => 'fas fa-fw fa-file',
+        ],
+        ['header' => 'Perfíl'],
+        [
+            'text' => 'Editar perfíl',
+            'url'  => '/admin/users/1/redirect',
+            'icon' => 'fas fa-fw fa-file',
+        ],
+        [
+            'text' => 'Editar contraseña',
+            'url'  => '/admin/users/1/redirect-pass',
             'icon' => 'fas fa-fw fa-file',
         ],
        

@@ -17,9 +17,10 @@
                         <form action="/admin/anios" method="POST">
                         @else
                         <form action="{{ route('anios.update', $year->id) }}" method="POST">
-                        @endif
-                            @method('PUT')
+                        @method('PUT')
 
+                        @endif
+                            
                             @csrf
                             <div class="row justify-content-center">
                                 <div class="col-8">
