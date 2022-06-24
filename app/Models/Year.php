@@ -72,4 +72,29 @@ class Year extends Model
         // Por último eliminamos el archivo temporal creado
         unlink('facturas.zip'); //Destruye el archivo temporal
     }
+
+    public static function createZipFilesSelect($files, $years)
+    {
+        // Creamos un instancia de la clase ZipArchive
+        $zip = new ZipArchive();
+        // Creamos y abrimos un archivo zip temporal
+        $zip->open("facturas.zip", ZipArchive::CREATE);
+        // Añadimos un directorio
+        $dir = 'facturas';
+        $zip->addEmptyDir($dir);
+        // Añadimos un archivo en la raid del zip.
+        for ($i=0; $i < count($files); $i++) {
+            $file_name = 'facturas/'.$years[$i].'/'.$files[$i];
+            $zip->addFile($file_name);
+        }
+        // Una vez añadido los archivos deseados cerramos el zip.
+        $zip->close();
+        // Creamos las cabezeras que forzaran la descarga del archivo como archivo zip.
+        header("Content-type: application/octet-stream");
+        header("Content-disposition: attachment; filename=facturas.zip");
+        // leemos el archivo creado
+        readfile('facturas.zip');
+        // Por último eliminamos el archivo temporal creado
+        unlink('facturas.zip'); //Destruye el archivo temporal
+    }
 }

@@ -36,4 +36,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('archivos', App\Http\Controllers\FileController::class);
     Route::get('archivos/search/execute', [App\Http\Controllers\FileController::class, 'searchFile']);
     Route::get('archivos/export/execute', [App\Http\Controllers\FileController::class, 'exporFiles']);
+    
+    Route::post('archivos/export/select', [App\Http\Controllers\FileController::class, 'exporSelectFiles']);
 });

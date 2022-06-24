@@ -37,6 +37,14 @@ class FileController extends Controller
         Year::createZip($year_file);
     }
 
+    public function exporSelectFiles(Request $request)
+    {
+        $name_file = $request->name_file;
+        $year_file = $request->name_year;
+
+        Year::createZipFilesSelect($name_file, $year_file);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
