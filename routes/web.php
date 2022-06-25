@@ -38,4 +38,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('archivos/export/execute', [App\Http\Controllers\FileController::class, 'exporFiles']);
     
     Route::post('archivos/export/select', [App\Http\Controllers\FileController::class, 'exporSelectFiles']);
+    Route::post('archivos/export/send-email', [App\Http\Controllers\FileController::class, 'sendSelectFiles']);
+    Route::get('archivos/{email_id}/download/selected', [App\Http\Controllers\FileController::class, 'downloadSelect']);
 });

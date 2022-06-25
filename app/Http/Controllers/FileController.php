@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EmailSendFiles;
+use App\Models\EmailsFiles;
+use App\Models\SendEmail;
 use App\Models\Year;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use View;
 
 class FileController extends Controller
 {
@@ -43,6 +49,42 @@ class FileController extends Controller
         $year_file = $request->name_year;
 
         Year::createZipFilesSelect($name_file, $year_file);
+    }
+
+    public function sendSelectFiles(Request $request)
+    {
+        $name_file    = $request->name_file;
+        $year_file    = $request->name_year;
+        $to        = $request->email;
+
+        //*guardado para poder descargar todos los archivos en zip
+        $send_email = new SendEmail(['user_id' => Auth::user()->id, 'correo' => $to]);
+        $send_email->save();
+
+        for ($i=0; $i < count($name_file); $i++) { 
+            $data_files = array(
+                'email_id' => $send_email->id,
+                'path' => $year_file[$i],
+                'file' => $name_file[$i]
+            );
+            $save_files = new EmailsFiles($data_files);
+            $save_files->save();
+        }
+
+        $path = "facturas";
+        $data_email = ['from' => 'contacto@xpertsystems.com.mx', 'subject' => 'Envio de archivos',
+        'path' => $path, 'email_id' => $send_email->id,
+        'name_file' => $name_file, 'year_file' => $year_file, 'cc' => ''];
+        Mail::to($to)->send(new EmailSendFiles($data_email));
+    }
+
+    public function downloadSelect($email_id)
+    {
+        $email = SendEmail::find($email_id);
+        if ($email != null) {
+            EmailsFiles::createZip($email->id);
+        }
+        return redirect('home');
     }
 
     /**

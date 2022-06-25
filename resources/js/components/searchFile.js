@@ -11,15 +11,28 @@ $('#iSelectAll').click(function(event) {
     }
 }); 
 
-window.exporAll = function() {
+window.modalSendEmail = function() {
+    const form = document.getElementById('frm-export');
+    let data = new FormData(form);
+    console.log(data);
+    $('#modal-correo').modal('show');
+}
+
+window.sendFilesEmail = function() {
+    $('#loading-email').show();
     const form = document.getElementById('frm-export');
     let data = new FormData(form);
 
-    let url = '/admin/archivos/export/select';
+    let url = '/admin/archivos/export/send-email';
 
     axios.post(url, data)
         .then(function (response) {
-            
+            $('#loading-email').hide();
+            Swal.fire(
+                'Información',
+                'El correo se ha enviado',
+                'success'
+              )
     });
 
 }
